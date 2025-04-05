@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { UserCreateDto } from './dto/user.dto';
 import {MessagePattern} from '@nestjs/microservices';
 import { patterns } from '../patterns';
+import { RoleCreateDto } from './dto/role.dto';
 
 @Controller('user')
 export class UserController {
@@ -68,5 +69,12 @@ async resetPassword(@Param('email')  email: string,
 @Body('newPassword') newPassword: string )
 {
   return this.userService.resetPassword(email, newPassword);  
+}
+
+@Post('role')
+@UsePipes(new ValidationPipe)
+async createRole(@Body() dto: RoleCreateDto)
+{
+   return this.userService.createRole(dto);
 }
 }

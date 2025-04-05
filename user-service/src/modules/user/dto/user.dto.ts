@@ -1,5 +1,6 @@
 import { StatementResultingChanges } from "node:sqlite"
-import { IsString } from "class-validator";
+import { IsInt, IsString } from "class-validator";
+import { RoleCreateDto } from "./role.dto";
 
 export class UserCreateDto {
     @IsString()
@@ -9,10 +10,11 @@ export class UserCreateDto {
     email: string
 
     @IsString()
-    password: string;
+    password: string
 
-    @IsString()
-    role: string
+    @IsInt()
+    roleId: number
+
 }
 
 export type TUsersUpdateDto = Partial<UserCreateDto>

@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma.service';
 import { UserCreateDto } from './dto/user.dto';
 import { RpcException } from '@nestjs/microservices';
 import * as bcrypt from 'bcrypt';
+import { RoleCreateDto } from './dto/role.dto';
 @Injectable()
 export class UserService {
     constructor(private readonly prisma:PrismaService){}
@@ -61,5 +62,10 @@ export class UserService {
         catch(error){
              throw new RpcException('User not found');
         }
+    }
+
+    async createRole(dto: RoleCreateDto)
+    {
+        return this.prisma.role.create({data: dto});
     }
 }
